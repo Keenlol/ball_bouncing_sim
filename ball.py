@@ -15,7 +15,7 @@ class Ball:
         turtle.penup()
         turtle.color(self.__color)
         turtle.fillcolor(self.__color)
-        turtle.goto(self.__x,self.__y)
+        turtle.goto(self.__x,self.__y - self.__size)
         turtle.pendown()
         turtle.begin_fill()
         turtle.circle(self.__size)
@@ -35,3 +35,5 @@ class Ball:
         # if the ball hits the ceiling or the floor, reverse the vy velocity
         if abs(self.__y) > (canvas_height - self.__size):
             self.__vy = -self.__vy
+
+        

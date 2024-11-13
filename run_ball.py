@@ -30,7 +30,7 @@ class BouncingBallSimulator:
     def __draw_border(self):
         turtle.penup()
         turtle.goto(-self.__canvas_width, -self.__canvas_height)
-        turtle.pensize(10)
+        turtle.pensize(1)
         turtle.pendown()
         turtle.color((0, 0, 0))
         for i in range(2):
@@ -47,11 +47,13 @@ class BouncingBallSimulator:
             for ball in self.__ball_list:
                 ball.draw_ball()
                 ball.move_ball(dt)
-                ball.update_ball_velocity(self.__canvas_width, self.__canvas_height)
+                ball.check_wall_collision(self.__canvas_width, self.__canvas_height)
+                for other_ball in self.__ball_list:
+                    if other_ball != ball:
+                        ball.check_ball_collision(other_ball)
             turtle.update()
 
 num_ball = int(input("Input the number of balls:"))
-s = BouncingBallSimulator(num_ball)
-s.run(1)
+BouncingBallSimulator(num_ball).run(1)
 # hold the window; close it by clicking the window close 'x' mark
 turtle.done()
